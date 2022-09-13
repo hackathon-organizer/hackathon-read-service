@@ -31,5 +31,4 @@ public class HackathronController {
         return hackathonService.getAllHackathons(pageable);
     }
 
-
 }
