@@ -15,8 +15,6 @@ spring:
       ddl-auto: validate
   application:
     name: hackathon-read-service
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.xml
 keycloak:
   auth-server-url: http://localhost:8080/auth
   realm: hackathon-organizer
