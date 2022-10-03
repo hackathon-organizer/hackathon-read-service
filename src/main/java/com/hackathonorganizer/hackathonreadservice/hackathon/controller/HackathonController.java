@@ -1,6 +1,5 @@
 package com.hackathonorganizer.hackathonreadservice.hackathon.controller;
 
-import com.hackathonorganizer.hackathonreadservice.hackathon.model.Hackathon;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonResponse;
 import com.hackathonorganizer.hackathonreadservice.hackathon.service.HackathonService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +13,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/hackathons")
-public class HackathronController {
+@RequestMapping("/api/v1/read/hackathons")
+public class HackathonController {
 
     private final HackathonService hackathonService;
 
