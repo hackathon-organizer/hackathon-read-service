@@ -1,5 +1,6 @@
 package com.hackathonorganizer.hackathonreadservice.team.model.repository;
 
+import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamInvitation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,5 @@ public interface TeamInvitationRepository extends JpaRepository<TeamInvitation, 
             "AND i.invitationStatus = 'PENDING'")
     List<TeamInvitation> getUserTeamInvitations(Long userId);
 
+    List<Tag> getTagsByTeamId(Long teamId);
 }

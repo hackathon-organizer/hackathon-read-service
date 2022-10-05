@@ -15,9 +15,5 @@ spring:
       ddl-auto: validate
   application:
     name: hackathon-read-service
-keycloak:
-  auth-server-url: http://localhost:8080/auth
-  realm: hackathon-organizer
-  resource: hackathon-read-service
 server:
   port: 0

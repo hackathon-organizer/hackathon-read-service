@@ -2,9 +2,11 @@ package com.hackathonorganizer.hackathonreadservice.team.model;
 
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.Hackathon;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -20,8 +22,17 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @NotEmpty
     private Long ownerId;
+
+    private String description;
+
+    @NotNull
+    @Builder.Default
+    @ColumnDefault("true")
+    private Boolean isOpen = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NotEmpty
