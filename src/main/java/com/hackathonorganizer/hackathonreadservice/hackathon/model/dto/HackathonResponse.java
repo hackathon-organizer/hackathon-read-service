@@ -2,6 +2,8 @@ package com.hackathonorganizer.hackathonreadservice.hackathon.model.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 public record HackathonResponse (
         @NotNull
@@ -11,6 +13,12 @@ public record HackathonResponse (
         String name,
 
         @NotEmpty
-        String description
+        String description,
+
+        Integer hackathonParticipantsNumber,
+
+        LocalDateTime eventStartDate,
+
+        LocalDateTime eventEndDate
 ) {
 }

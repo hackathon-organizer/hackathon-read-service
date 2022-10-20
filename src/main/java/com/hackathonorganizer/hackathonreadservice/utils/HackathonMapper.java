@@ -9,7 +9,10 @@ public class HackathonMapper {
         return new HackathonResponse(
                 hackathon.getId(),
                 hackathon.getName(),
-                hackathon.getDescription()
+                hackathon.getDescription(),
+                hackathon.getHackathonParticipantsIds().size(),
+                hackathon.getEventStartDate(),
+                hackathon.getEventEndDate()
         );
     }
 

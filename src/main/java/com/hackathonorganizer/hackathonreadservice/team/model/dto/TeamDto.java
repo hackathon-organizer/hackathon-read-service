@@ -17,6 +17,8 @@ public record TeamDto (
 
         boolean isOpen,
 
+        Long teamChatRoomId,
+
         List<Tag> tags
 ){
 }

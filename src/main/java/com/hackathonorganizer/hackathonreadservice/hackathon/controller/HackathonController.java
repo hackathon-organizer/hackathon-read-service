@@ -1,5 +1,6 @@
 package com.hackathonorganizer.hackathonreadservice.hackathon.controller;
 
+import com.hackathonorganizer.hackathonreadservice.hackathon.model.Criteria;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonResponse;
 import com.hackathonorganizer.hackathonreadservice.hackathon.service.HackathonService;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
@@ -37,6 +38,12 @@ public class HackathonController {
     public List<HackathonResponse> getAllHackathons(Pageable pageable) {
 
         return hackathonService.getAllHackathons(pageable);
+    }
+
+    @GetMapping("/{id}/criteria")
+    public List<Criteria> getHackathonRateCriteria(@PathVariable("id") Long hackathonId) {
+
+        return hackathonService.getHackathonCriteria(hackathonId);
     }
 
 }

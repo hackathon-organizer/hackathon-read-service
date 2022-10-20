@@ -1,9 +1,12 @@
 package com.hackathonorganizer.hackathonreadservice.hackathon.service;
 
 import com.hackathonorganizer.hackathonreadservice.hackathon.exception.HackathonException;
+import com.hackathonorganizer.hackathonreadservice.hackathon.model.Criteria;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.Hackathon;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonResponse;
+import com.hackathonorganizer.hackathonreadservice.hackathon.repository.CriteriaRepository;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
+import com.hackathonorganizer.hackathonreadservice.utils.HackathonMapper;
 import com.hackathonorganizer.hackathonreadservice.utils.TeamMapper;
 import lombok.RequiredArgsConstructor;
 import com.hackathonorganizer.hackathonreadservice.repository.HackathonRepository;
@@ -18,6 +21,7 @@ import java.util.List;
 public class HackathonService {
 
     private final HackathonRepository hackathonRepository;
+    private final CriteriaRepository criteriaRepository;
 
     public HackathonResponse getHackathonById(Long hackathonId) {
 
@@ -26,7 +30,7 @@ public class HackathonService {
                         "Hackathon with id: %d not found", hackathonId),
                         HttpStatus.NOT_FOUND));
 
-        return mapToDto(hackathon);
+        return HackathonMapper.mapToHackathonResponse(hackathon);
     }
 
     public List<TeamDto> getHackathonTeamsById(Long hackathonId) {
@@ -41,12 +45,12 @@ public class HackathonService {
 
     public List<HackathonResponse> getAllHackathons(Pageable pageable) {
 
-        return hackathonRepository.findAll(pageable).map(this::mapToDto).stream().toList();
+        return hackathonRepository.findAll(pageable)
+                .map(HackathonMapper::mapToHackathonResponse).stream().toList();
     }
 
-    private HackathonResponse mapToDto(Hackathon hackathon) {
+    public List<Criteria> getHackathonCriteria(Long hackathonId) {
 
-        return new HackathonResponse(hackathon.getId(), hackathon.getName(),
-                hackathon.getDescription());
+        return criteriaRepository.findHackathonCriteriaById(hackathonId);
     }
 }

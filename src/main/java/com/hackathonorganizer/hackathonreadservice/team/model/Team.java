@@ -16,6 +16,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Team {
 
     @Id
@@ -33,6 +34,8 @@ public class Team {
     @Builder.Default
     @ColumnDefault("true")
     private Boolean isOpen = true;
+
+    private Long chatRoomId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NotEmpty
