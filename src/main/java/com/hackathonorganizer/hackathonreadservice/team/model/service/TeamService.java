@@ -41,4 +41,11 @@ public class TeamService {
 
         return TeamMapper.mapToTeamDto(team);
     }
+
+    public boolean isUserTeamOwner(Long teamId, Long userId) {
+
+        Team team = teamRepository.findById(teamId).orElseThrow();
+
+        return team.getOwnerId().equals(userId);
+    }
 }
