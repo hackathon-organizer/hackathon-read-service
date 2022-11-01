@@ -2,12 +2,12 @@ package com.hackathonorganizer.hackathonreadservice.hackathon.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
-import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import javax.validation.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -26,23 +26,23 @@ public class Hackathon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "Name can not be empty!")
     private String name;
 
-    @NotEmpty
+    @NotEmpty(message = "Description can not be empty!")
     private String description;
 
-    @NotEmpty
+    @NotEmpty(message = "Organizer info can not be empty!")
     private String organizerInfo;
 
     @Builder.Default
     private boolean isActive = true;
 
-    @NotNull
+    @NotNull(message = "Event start date can not be null!")
     @JsonFormat(pattern = "HH:mm:ss dd-MM-yyyy")
     private LocalDateTime eventStartDate;
 
-    @NotNull
+    @NotNull(message = "Event end date can not be null!")
     @JsonFormat(pattern = "HH:mm:ss dd-MM-yyyy")
     private LocalDateTime eventEndDate;
 
