@@ -48,4 +48,12 @@ public class TeamService {
 
         return team.getOwnerId().equals(userId);
     }
+
+    public List<TeamDto> getUserMatchingTeams(List<String> userTagsNames) {
+
+        // TODO add teams limit
+
+        return teamRepository.getUserMatchingTeams(userTagsNames).stream()
+                .map(TeamMapper::mapToTeamDto).toList();
+    }
 }

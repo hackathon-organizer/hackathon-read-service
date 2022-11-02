@@ -33,17 +33,23 @@ public class TeamController {
         return teamService.getAvailableTags();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public TeamDto getTeamById(@PathVariable("id") Long teamId) {
 
         return teamService.getTeamById(teamId);
     }
 
-    @GetMapping("{teamId}/owners")
+    @GetMapping("/{teamId}/owners")
     public boolean isUserTeamOwner(@PathVariable("teamId") Long teamId,
             @RequestParam("userId") Long userId) {
 
         return teamService.isUserTeamOwner(teamId, userId);
+    }
+
+    @GetMapping("/suggestions")
+    public List<TeamDto> getMatchingTeams(@RequestBody List<String> userTagsNames) {
+
+        return teamService.getUserMatchingTeams(userTagsNames);
     }
 
 }
