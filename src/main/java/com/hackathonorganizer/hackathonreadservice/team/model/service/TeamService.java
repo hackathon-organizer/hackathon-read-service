@@ -3,6 +3,7 @@ package com.hackathonorganizer.hackathonreadservice.team.model.service;
 import com.hackathonorganizer.hackathonreadservice.hackathon.exception.TeamException;
 import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
+import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.repository.TagRepository;
@@ -10,9 +11,11 @@ import com.hackathonorganizer.hackathonreadservice.team.model.repository.TeamInv
 import com.hackathonorganizer.hackathonreadservice.team.model.repository.TeamRepository;
 import com.hackathonorganizer.hackathonreadservice.utils.TeamMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,11 +52,15 @@ public class TeamService {
         return team.getOwnerId().equals(userId);
     }
 
-    public List<TeamDto> getUserMatchingTeams(List<String> userTagsNames) {
+    public List<TeamDto> getUserMatchingTeams(List<Long> userTagsIds, Long hackathonId) {
 
-        // TODO add teams limit
+        List<String> userTagsNames = tagRepository.findAllById(userTagsIds)
+                .stream().map(Tag::getName).toList();
 
-        return teamRepository.getUserMatchingTeams(userTagsNames).stream()
-                .map(TeamMapper::mapToTeamDto).toList();
+        List<TeamSuggestion> foundedTeams = teamRepository.getUserMatchingTeams(
+                userTagsNames, hackathonId, PageRequest.of(0, 10));
+
+        return foundedTeams.stream().map(teamSuggestion ->
+                TeamMapper.mapToTeamDto(teamSuggestion.getTeam())).toList();
     }
 }

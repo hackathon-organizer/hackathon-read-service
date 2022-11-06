@@ -3,6 +3,7 @@ package com.hackathonorganizer.hackathonreadservice.utils;
 import com.hackathonorganizer.hackathonreadservice.team.model.InvitationStatus;
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamInvitation;
+import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
 import lombok.experimental.UtilityClass;

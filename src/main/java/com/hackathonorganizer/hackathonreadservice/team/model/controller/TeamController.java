@@ -46,10 +46,11 @@ public class TeamController {
         return teamService.isUserTeamOwner(teamId, userId);
     }
 
-    @GetMapping("/suggestions")
-    public List<TeamDto> getMatchingTeams(@RequestBody List<String> userTagsNames) {
+    @PostMapping("/suggestions")
+    public List<TeamDto> getMatchingTeams(@RequestBody List<Long> userTagsNames,
+            @RequestParam("hackathonId") Long hackathonId) {
 
-        return teamService.getUserMatchingTeams(userTagsNames);
+        return teamService.getUserMatchingTeams(userTagsNames, hackathonId);
     }
 
 }
