@@ -15,6 +15,4 @@ public interface TeamInvitationRepository extends JpaRepository<TeamInvitation, 
             "WHERE i.toUserId = :userId " +
             "AND i.invitationStatus = 'PENDING'")
     List<TeamInvitation> getUserTeamInvitations(Long userId);
-
-    List<Tag> getTagsByTeamId(Long teamId);
 }

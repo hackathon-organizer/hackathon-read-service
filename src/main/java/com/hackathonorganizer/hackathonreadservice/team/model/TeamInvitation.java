@@ -11,8 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class TeamInvitation {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

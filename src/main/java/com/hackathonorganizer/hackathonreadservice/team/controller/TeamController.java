@@ -1,4 +1,4 @@
-package com.hackathonorganizer.hackathonreadservice.team.model.controller;
+package com.hackathonorganizer.hackathonreadservice.team.controller;
 
 import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
@@ -18,17 +18,14 @@ public class TeamController {
 
     private final TeamService teamService;
 
-    @GetMapping("/invites/{userId}")
-    public List<TeamInvitationDto> fetchInvites(@PathVariable("userId") Long userId) {
-
-        log.info("Fetching user invites");
+    @GetMapping("/invitations/{userId}")
+    public List<TeamInvitationDto> getInvitations(@PathVariable("userId") Long userId) {
 
         return teamService.getUserInvitations(userId);
     }
 
     @GetMapping("/tags")
     public List<Tag> getAvailableTags() {
-        log.info("Returning available tags");
 
         return teamService.getAvailableTags();
     }
@@ -47,7 +44,7 @@ public class TeamController {
     }
 
     @PostMapping("/suggestions")
-    public List<TeamDto> getMatchingTeams(@RequestBody List<Long> userTagsNames,
+    public List<TeamDto> getMatchingTeams(@RequestBody List<String> userTagsNames,
             @RequestParam("hackathonId") Long hackathonId) {
 
         return teamService.getUserMatchingTeams(userTagsNames, hackathonId);

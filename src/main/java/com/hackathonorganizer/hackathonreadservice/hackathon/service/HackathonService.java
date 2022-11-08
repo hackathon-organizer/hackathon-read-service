@@ -30,7 +30,7 @@ public class HackathonService {
                         "Hackathon with id: %d not found", hackathonId),
                         HttpStatus.NOT_FOUND));
 
-        return HackathonMapper.mapToHackathonResponse(hackathon);
+        return HackathonMapper.mapToHackathonDto(hackathon);
     }
 
     public List<TeamDto> getHackathonTeamsById(Long hackathonId) {
@@ -46,7 +46,7 @@ public class HackathonService {
     public List<HackathonResponse> getAllHackathons(Pageable pageable) {
 
         return hackathonRepository.findAll(pageable)
-                .map(HackathonMapper::mapToHackathonResponse).stream().toList();
+                .map(HackathonMapper::mapToHackathonDto).stream().toList();
     }
 
     public List<Criteria> getHackathonCriteria(Long hackathonId) {
