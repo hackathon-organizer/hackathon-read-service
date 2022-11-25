@@ -1,4 +1,4 @@
-package com.hackathonorganizer.hackathonreadservice.team.model.service;
+package com.hackathonorganizer.hackathonreadservice.team.service;
 
 import com.hackathonorganizer.hackathonreadservice.hackathon.exception.TeamException;
 import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
@@ -8,10 +8,14 @@ import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.repository.TagRepository;
 import com.hackathonorganizer.hackathonreadservice.team.model.repository.TeamInvitationRepository;
-import com.hackathonorganizer.hackathonreadservice.team.model.repository.TeamRepository;
+import com.hackathonorganizer.hackathonreadservice.team.repository.TeamRepository;
 import com.hackathonorganizer.hackathonreadservice.utils.TeamMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +65,26 @@ public class TeamService {
 
         return foundedTeams.stream().map(teamSuggestion ->
                 TeamMapper.mapToTeamDto(teamSuggestion.getTeam())).toList();
+    }
+
+    public Page<TeamDto> getTeamsByHackathonId(Long hackathonId, Pageable pageable) {
+
+        Page<Team> teamsPage = teamRepository.findTeamsByHackathonId(hackathonId, pageable);
+
+        List<TeamDto> teamsResponse = teamsPage.getContent()
+                .stream().map(TeamMapper::mapToTeamDto).toList();
+
+        return new PageImpl<>(teamsResponse, pageable, teamsPage.getTotalElements());
+    }
+
+    public Page<TeamDto> getTeamsByName(Long hackathonId, String name, Pageable pageable) {
+
+        Page<Team> teamsPage = teamRepository
+                .findTeamsByHackathonIdAndName(hackathonId, name, pageable);
+
+        List<TeamDto> teamsResponse = teamsPage.getContent()
+                .stream().map(TeamMapper::mapToTeamDto).toList();
+
+        return new PageImpl<>(teamsResponse, pageable, teamsPage.getTotalElements());
     }
 }

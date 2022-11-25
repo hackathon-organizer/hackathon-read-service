@@ -25,6 +25,7 @@ public class TeamMapper {
                 team.getId(),
                 team.getName(),
                 team.getDescription(),
+                team.getOwnerId(),
                 team.getIsOpen(),
                 team.getChatRoomId(),
                 team.getTags()

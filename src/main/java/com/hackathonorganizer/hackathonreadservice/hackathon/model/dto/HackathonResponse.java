@@ -15,6 +15,8 @@ public record HackathonResponse (
         @NotEmpty
         String description,
 
+        boolean isActive,
+
         Integer hackathonParticipantsNumber,
 
         LocalDateTime eventStartDate,

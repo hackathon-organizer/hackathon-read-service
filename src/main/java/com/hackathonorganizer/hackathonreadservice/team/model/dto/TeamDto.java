@@ -15,6 +15,8 @@ public record TeamDto (
 
         String description,
 
+        Long ownerId,
+
         boolean isOpen,
 
         Long teamChatRoomId,

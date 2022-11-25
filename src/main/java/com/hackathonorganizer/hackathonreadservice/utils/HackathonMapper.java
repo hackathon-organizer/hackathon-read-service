@@ -10,6 +10,7 @@ public class HackathonMapper {
                 hackathon.getId(),
                 hackathon.getName(),
                 hackathon.getDescription(),
+                hackathon.isActive(),
                 hackathon.getHackathonParticipantsIds().size(),
                 hackathon.getEventStartDate(),
                 hackathon.getEventEndDate()

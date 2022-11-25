@@ -3,11 +3,14 @@ package com.hackathonorganizer.hackathonreadservice.team.controller;
 import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
-import com.hackathonorganizer.hackathonreadservice.team.model.service.TeamService;
+import com.hackathonorganizer.hackathonreadservice.team.service.TeamService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -17,6 +20,20 @@ import java.util.List;
 public class TeamController {
 
     private final TeamService teamService;
+
+    @GetMapping
+    public Page<TeamDto> getTeamsByHackathonId(@RequestParam("hackathonId") Long hackathonId,
+            Pageable pageable) {
+
+        return teamService.getTeamsByHackathonId(hackathonId, pageable);
+    }
+
+    @GetMapping("/search")
+    public Page<TeamDto> getTeamsByName(@RequestParam("hackathonId") Long hackathonId,
+            @RequestParam("name") String name, Pageable pageable) {
+
+        return teamService.getTeamsByName(hackathonId, name, pageable);
+    }
 
     @GetMapping("/invitations/{userId}")
     public List<TeamInvitationDto> getInvitations(@PathVariable("userId") Long userId) {
@@ -36,12 +53,12 @@ public class TeamController {
         return teamService.getTeamById(teamId);
     }
 
-    @GetMapping("/{teamId}/owners")
-    public boolean isUserTeamOwner(@PathVariable("teamId") Long teamId,
-            @RequestParam("userId") Long userId) {
-
-        return teamService.isUserTeamOwner(teamId, userId);
-    }
+//    @GetMapping("/{teamId}/owners")
+//    public boolean isUserTeamOwner(@PathVariable("teamId") Long teamId,
+//            @RequestParam("userId") Long userId) {
+//
+//        return teamService.isUserTeamOwner(teamId, userId);
+//    }
 
     @PostMapping("/suggestions")
     public List<TeamDto> getMatchingTeams(@RequestBody List<String> userTagsNames,

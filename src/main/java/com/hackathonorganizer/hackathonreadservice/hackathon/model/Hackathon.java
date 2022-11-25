@@ -19,7 +19,6 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Slf4j
 public class Hackathon {
 
     @Id

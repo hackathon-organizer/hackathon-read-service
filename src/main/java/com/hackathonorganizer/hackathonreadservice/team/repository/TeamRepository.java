@@ -1,7 +1,8 @@
-package com.hackathonorganizer.hackathonreadservice.team.model.repository;
+package com.hackathonorganizer.hackathonreadservice.team.repository;
 
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,9 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
                 "AND t.isOpen = true " +
                 "GROUP BY t")
     List<TeamSuggestion> getUserMatchingTeams(List<String> tags, Long hackathonId, Pageable pageable);
+
+    Page<Team> findTeamsByHackathonId(Long hackathonId, Pageable pageable);
+
+    @Query("SELECT t FROM Team t WHERE t.hackathon.id = :hackathonId AND t.name LIKE %:name%")
+    Page<Team> findTeamsByHackathonIdAndName(Long hackathonId, String name, Pageable pageable);
 }
