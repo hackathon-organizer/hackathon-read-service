@@ -5,6 +5,7 @@ import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamInvitation;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -33,5 +34,4 @@ public class TeamMapper {
                 team.getTags()
         );
     }
-
 }

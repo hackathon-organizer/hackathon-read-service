@@ -4,6 +4,7 @@ import com.hackathonorganizer.hackathonreadservice.hackathon.model.Criteria;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonResponse;
 import com.hackathonorganizer.hackathonreadservice.hackathon.service.HackathonService;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
 import com.hackathonorganizer.hackathonreadservice.utils.HackathonMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -55,7 +56,7 @@ public class HackathonController {
     }
 
     @GetMapping("/{hackathonId}/leaderboard")
-    public List<TeamDto> getHackathonLeaderboard(@PathVariable("hackathonId") Long hackathonId) {
+    public List<TeamScoreDto> getHackathonLeaderboard(@PathVariable("hackathonId") Long hackathonId) {
 
         return hackathonService.getHackathonLeaderboard(hackathonId);
     }

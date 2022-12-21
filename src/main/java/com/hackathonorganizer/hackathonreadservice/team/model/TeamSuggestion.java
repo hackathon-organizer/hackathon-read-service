@@ -1,13 +1,9 @@
 package com.hackathonorganizer.hackathonreadservice.team.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 
-@AllArgsConstructor
-@Getter
-@Setter
-public class TeamSuggestion {
-    private Team team;
-    private Long numberOfEqualTags;
+public record TeamSuggestion(
+        Team team,
+        Long numberOfEqualTags
+) {
 }

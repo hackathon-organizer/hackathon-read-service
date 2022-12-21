@@ -7,6 +7,7 @@ import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.Hackathon
 import com.hackathonorganizer.hackathonreadservice.hackathon.repository.CriteriaRepository;
 import com.hackathonorganizer.hackathonreadservice.hackathon.repository.HackathonRepository;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
 import com.hackathonorganizer.hackathonreadservice.team.service.TeamService;
 import com.hackathonorganizer.hackathonreadservice.utils.HackathonMapper;
 import com.hackathonorganizer.hackathonreadservice.utils.TeamMapper;
@@ -66,7 +67,7 @@ public class HackathonService {
         return hackathon.getHackathonParticipantsIds();
     }
 
-    public List<TeamDto> getHackathonLeaderboard(Long hackathonId) {
+    public List<TeamScoreDto> getHackathonLeaderboard(Long hackathonId) {
 
         return teamService.findTeamsLeaderboardByHackathonId(hackathonId);
     }

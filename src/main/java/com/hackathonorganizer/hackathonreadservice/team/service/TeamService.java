@@ -6,6 +6,7 @@ import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.repository.TagRepository;
 import com.hackathonorganizer.hackathonreadservice.team.model.repository.TeamInvitationRepository;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamRepository;
@@ -64,7 +65,7 @@ public class TeamService {
                 userTags, hackathonId, PageRequest.of(0, 10));
 
         return foundedTeams.stream().map(teamSuggestion ->
-                TeamMapper.mapToTeamDto(teamSuggestion.getTeam())).toList();
+                TeamMapper.mapToTeamDto(teamSuggestion.team())).toList();
     }
 
     public Page<TeamDto> getTeamsByHackathonId(Long hackathonId, Pageable pageable) {
@@ -88,8 +89,8 @@ public class TeamService {
         return new PageImpl<>(teamsResponse, pageable, teamsPage.getTotalElements());
     }
 
-    public List<TeamDto> findTeamsLeaderboardByHackathonId(Long hackathonId) {
+    public List<TeamScoreDto> findTeamsLeaderboardByHackathonId(Long hackathonId) {
 
-        return teamRepository.getLeaderboard(hackathonId).stream().map(TeamMapper::mapToTeamDto).toList();
+        return teamRepository.getLeaderboard(hackathonId);
     }
 }
