@@ -43,8 +43,7 @@ public class TeamService {
 
     public TeamDto getTeamById(Long teamId) {
 
-        Team team = teamRepository.findById(teamId).orElseThrow(() ->
-                new TeamException("Team with id: " + teamId + " not found",
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new TeamException("Team with id: " + teamId + " not found",
                         HttpStatus.NOT_FOUND));
 
         return TeamMapper.mapToTeamDto(team);
@@ -52,8 +51,7 @@ public class TeamService {
 
     public boolean isUserTeamOwner(Long teamId, Long userId) {
 
-        Team team = teamRepository.findById(teamId).orElseThrow(() ->
-                new TeamException("Team with id: " + teamId + " not found",
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new TeamException("Team with id: " + teamId + " not found",
                         HttpStatus.NOT_FOUND));
 
         return team.getOwnerId().equals(userId);
@@ -61,30 +59,25 @@ public class TeamService {
 
     public List<TeamDto> getUserMatchingTeams(List<String> userTags, Long hackathonId) {
 
-        List<TeamSuggestion> foundedTeams = teamRepository.getUserMatchingTeams(
-                userTags, hackathonId, PageRequest.of(0, 10));
+        List<TeamSuggestion> foundedTeams = teamRepository.getUserMatchingTeams(userTags, hackathonId, PageRequest.of(0, 10));
 
-        return foundedTeams.stream().map(teamSuggestion ->
-                TeamMapper.mapToTeamDto(teamSuggestion.team())).toList();
+        return foundedTeams.stream().map(teamSuggestion -> TeamMapper.mapToTeamDto(teamSuggestion.team())).toList();
     }
 
     public Page<TeamDto> getTeamsByHackathonId(Long hackathonId, Pageable pageable) {
 
         Page<Team> teamsPage = teamRepository.findTeamsByHackathonId(hackathonId, pageable);
 
-        List<TeamDto> teamsResponse = teamsPage.getContent()
-                .stream().map(TeamMapper::mapToTeamDto).toList();
+        List<TeamDto> teamsResponse = teamsPage.getContent().stream().map(TeamMapper::mapToTeamDto).toList();
 
         return new PageImpl<>(teamsResponse, pageable, teamsPage.getTotalElements());
     }
 
     public Page<TeamDto> getTeamsByName(Long hackathonId, String name, Pageable pageable) {
 
-        Page<Team> teamsPage = teamRepository
-                .findTeamsByHackathonIdAndName(hackathonId, name, pageable);
+        Page<Team> teamsPage = teamRepository.findTeamsByHackathonIdAndName(hackathonId, name, pageable);
 
-        List<TeamDto> teamsResponse = teamsPage.getContent()
-                .stream().map(TeamMapper::mapToTeamDto).toList();
+        List<TeamDto> teamsResponse = teamsPage.getContent().stream().map(TeamMapper::mapToTeamDto).toList();
 
         return new PageImpl<>(teamsResponse, pageable, teamsPage.getTotalElements());
     }

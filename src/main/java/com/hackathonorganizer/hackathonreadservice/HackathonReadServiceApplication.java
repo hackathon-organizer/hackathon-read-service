@@ -10,5 +10,4 @@ public class HackathonReadServiceApplication {
 
         SpringApplication.run(HackathonReadServiceApplication.class, args);
     }
-
 }

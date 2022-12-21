@@ -52,13 +52,6 @@ public class TeamController {
         return teamService.getTeamById(teamId);
     }
 
-//    @GetMapping("/{teamId}/owners")
-//    public boolean isUserTeamOwner(@PathVariable("teamId") Long teamId,
-//            @RequestParam("userId") Long userId) {
-//
-//        return teamService.isUserTeamOwner(teamId, userId);
-//    }
-
     @PostMapping("/suggestions")
     public List<TeamDto> getMatchingTeams(@RequestBody List<String> userTagsNames,
                                           @RequestParam("hackathonId") Long hackathonId) {
