@@ -8,6 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TeamSuggestion {
-        private Team team;
-        private Long numberOfEqualTags;
+    private Team team;
+    private Long numberOfEqualTags;
 }

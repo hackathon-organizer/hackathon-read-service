@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.sun.istack.NotNull;
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-import javax.validation.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;

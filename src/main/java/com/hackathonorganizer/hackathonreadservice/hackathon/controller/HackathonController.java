@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
@@ -40,17 +39,24 @@ public class HackathonController {
     @GetMapping
     public Page<HackathonResponse> getAllHackathons(Principal principal, Pageable pageable) {
 
-        return hackathonService.getAllHackathons(principal, pageable);
+        return hackathonService.getAllHackathons(pageable);
     }
 
-    @GetMapping("/{id}/criteria")
-    public List<Criteria> getHackathonRateCriteria(@PathVariable("id") Long hackathonId) {
+    @GetMapping("/{hackathonId}/criteria")
+    public List<Criteria> getHackathonRateCriteria(@PathVariable("hackathonId") Long hackathonId) {
 
-        return hackathonService.getHackathonCriteria(hackathonId);
+        return hackathonService.getHackathonRatingCriteria(hackathonId);
     }
 
     @GetMapping("/{hackathonId}/participants")
     public Set<Long> getHackathonParticipantsIds(@PathVariable("hackathonId") Long hackathonId) {
+
         return hackathonService.getHackathonParticipantsIds(hackathonId);
+    }
+
+    @GetMapping("/{hackathonId}/leaderboard")
+    public List<TeamDto> getHackathonLeaderboard(@PathVariable("hackathonId") Long hackathonId) {
+
+        return hackathonService.getHackathonLeaderboard(hackathonId);
     }
 }

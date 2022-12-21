@@ -11,7 +11,6 @@ import com.hackathonorganizer.hackathonreadservice.team.model.repository.TeamInv
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamRepository;
 import com.hackathonorganizer.hackathonreadservice.utils.TeamMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -37,6 +36,7 @@ public class TeamService {
     }
 
     public List<Tag> getAvailableTags() {
+
         return tagRepository.findAll();
     }
 
@@ -44,7 +44,7 @@ public class TeamService {
 
         Team team = teamRepository.findById(teamId).orElseThrow(() ->
                 new TeamException("Team with id: " + teamId + " not found",
-                HttpStatus.NOT_FOUND));
+                        HttpStatus.NOT_FOUND));
 
         return TeamMapper.mapToTeamDto(team);
     }
@@ -53,7 +53,7 @@ public class TeamService {
 
         Team team = teamRepository.findById(teamId).orElseThrow(() ->
                 new TeamException("Team with id: " + teamId + " not found",
-                HttpStatus.NOT_FOUND));
+                        HttpStatus.NOT_FOUND));
 
         return team.getOwnerId().equals(userId);
     }
@@ -86,5 +86,10 @@ public class TeamService {
                 .stream().map(TeamMapper::mapToTeamDto).toList();
 
         return new PageImpl<>(teamsResponse, pageable, teamsPage.getTotalElements());
+    }
+
+    public List<TeamDto> findTeamsLeaderboardByHackathonId(Long hackathonId) {
+
+        return teamRepository.getLeaderboard(hackathonId).stream().map(TeamMapper::mapToTeamDto).toList();
     }
 }

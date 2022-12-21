@@ -2,7 +2,7 @@ package com.hackathonorganizer.hackathonreadservice.team.model.dto;
 
 import com.hackathonorganizer.hackathonreadservice.team.model.InvitationStatus;
 
-public record TeamInvitationDto (
+public record TeamInvitationDto(
 
         Long id,
         String fromUserName,
@@ -11,4 +11,5 @@ public record TeamInvitationDto (
         String teamName,
         Long teamId
 
-) {}
+) {
+}

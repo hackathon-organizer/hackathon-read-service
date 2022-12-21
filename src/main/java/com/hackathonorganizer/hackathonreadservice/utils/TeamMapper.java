@@ -11,6 +11,7 @@ import lombok.experimental.UtilityClass;
 public class TeamMapper {
 
     public static TeamInvitationDto mapToTeamInvitationDto(TeamInvitation teamInvitation) {
+
         return new TeamInvitationDto(
                 teamInvitation.getId(),
                 teamInvitation.getFromUserName(),
@@ -21,6 +22,7 @@ public class TeamMapper {
     }
 
     public static TeamDto mapToTeamDto(Team team) {
+
         return new TeamDto(
                 team.getId(),
                 team.getName(),

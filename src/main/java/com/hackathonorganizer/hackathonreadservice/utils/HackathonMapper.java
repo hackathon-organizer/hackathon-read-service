@@ -6,6 +6,7 @@ import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.Hackathon
 public class HackathonMapper {
 
     public static HackathonResponse mapToHackathonDto(Hackathon hackathon) {
+
         return new HackathonResponse(
                 hackathon.getId(),
                 hackathon.getName(),

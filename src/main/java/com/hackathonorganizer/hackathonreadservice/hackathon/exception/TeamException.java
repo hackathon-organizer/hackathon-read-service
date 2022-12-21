@@ -9,6 +9,7 @@ public class TeamException extends RuntimeException {
     private final HttpStatus httpStatus;
 
     public TeamException(String message, HttpStatus httpStatus) {
+
         super(message);
         this.httpStatus = httpStatus;
     }

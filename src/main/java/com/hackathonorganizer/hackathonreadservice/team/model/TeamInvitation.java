@@ -14,23 +14,23 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamInvitation {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @NotEmpty
-        private String fromUserName;
+    @NotEmpty
+    private String fromUserName;
 
-        @NotNull
-        private Long toUserId;
+    @NotNull
+    private Long toUserId;
 
-        @Enumerated(EnumType.STRING)
-        private InvitationStatus invitationStatus;
+    @Enumerated(EnumType.STRING)
+    private InvitationStatus invitationStatus;
 
-        @NotEmpty
-        private String teamName;
+    @NotEmpty
+    private String teamName;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JsonIgnore
-        private Team team;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Team team;
 }

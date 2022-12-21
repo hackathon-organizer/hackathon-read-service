@@ -7,6 +7,7 @@ import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.Hackathon
 import com.hackathonorganizer.hackathonreadservice.hackathon.repository.CriteriaRepository;
 import com.hackathonorganizer.hackathonreadservice.hackathon.repository.HackathonRepository;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
+import com.hackathonorganizer.hackathonreadservice.team.service.TeamService;
 import com.hackathonorganizer.hackathonreadservice.utils.HackathonMapper;
 import com.hackathonorganizer.hackathonreadservice.utils.TeamMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.ws.rs.core.SecurityContext;
-import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -26,30 +25,26 @@ import java.util.Set;
 public class HackathonService {
 
     private final HackathonRepository hackathonRepository;
+    private final TeamService teamService;
     private final CriteriaRepository criteriaRepository;
 
     public Hackathon getHackathonById(Long hackathonId) {
 
         return hackathonRepository.findById(hackathonId)
-                .orElseThrow(() -> new HackathonException(String.format(
-                        "Hackathon with id: %d not found", hackathonId),
+                .orElseThrow(() -> new HackathonException(String.format("Hackathon with id: %d not found", hackathonId),
                         HttpStatus.NOT_FOUND));
     }
 
     public List<TeamDto> getHackathonTeamsById(Long hackathonId) {
 
         Hackathon hackathon = hackathonRepository.findById(hackathonId)
-                .orElseThrow(() -> new HackathonException(String.format(
-                        "Hackathon with id: %d not found", hackathonId),
+                .orElseThrow(() -> new HackathonException(String.format("Hackathon with id: %d not found", hackathonId),
                         HttpStatus.NOT_FOUND));
 
         return hackathon.getTeams().stream().map(TeamMapper::mapToTeamDto).toList();
     }
 
-    public Page<HackathonResponse> getAllHackathons(Principal principal,
-            Pageable pageable) {
-
-        System.out.println(principal.getName());
+    public Page<HackathonResponse> getAllHackathons(Pageable pageable) {
 
         Page<Hackathon> hackathonsPage = hackathonRepository.findAll(pageable);
 
@@ -59,7 +54,7 @@ public class HackathonService {
         return new PageImpl<>(hackathonResponses, pageable, hackathonsPage.getTotalElements());
     }
 
-    public List<Criteria> getHackathonCriteria(Long hackathonId) {
+    public List<Criteria> getHackathonRatingCriteria(Long hackathonId) {
 
         return criteriaRepository.findCriteriaByHackathonId(hackathonId);
     }
@@ -69,5 +64,10 @@ public class HackathonService {
         Hackathon hackathon = getHackathonById(hackathonId);
 
         return hackathon.getHackathonParticipantsIds();
+    }
+
+    public List<TeamDto> getHackathonLeaderboard(Long hackathonId) {
+
+        return teamService.findTeamsLeaderboardByHackathonId(hackathonId);
     }
 }

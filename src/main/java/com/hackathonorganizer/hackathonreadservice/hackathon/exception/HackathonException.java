@@ -9,6 +9,7 @@ public class HackathonException extends RuntimeException {
     private final HttpStatus httpStatus;
 
     public HackathonException(String message, HttpStatus httpStatus) {
+
         super(message);
         this.httpStatus = httpStatus;
     }

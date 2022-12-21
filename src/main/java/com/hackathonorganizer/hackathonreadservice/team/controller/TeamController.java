@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -23,14 +22,14 @@ public class TeamController {
 
     @GetMapping
     public Page<TeamDto> getTeamsByHackathonId(@RequestParam("hackathonId") Long hackathonId,
-            Pageable pageable) {
+                                               Pageable pageable) {
 
         return teamService.getTeamsByHackathonId(hackathonId, pageable);
     }
 
     @GetMapping("/search")
     public Page<TeamDto> getTeamsByName(@RequestParam("hackathonId") Long hackathonId,
-            @RequestParam("name") String name, Pageable pageable) {
+                                        @RequestParam("name") String name, Pageable pageable) {
 
         return teamService.getTeamsByName(hackathonId, name, pageable);
     }
@@ -62,9 +61,8 @@ public class TeamController {
 
     @PostMapping("/suggestions")
     public List<TeamDto> getMatchingTeams(@RequestBody List<String> userTagsNames,
-            @RequestParam("hackathonId") Long hackathonId) {
+                                          @RequestParam("hackathonId") Long hackathonId) {
 
         return teamService.getUserMatchingTeams(userTagsNames, hackathonId);
     }
-
 }
