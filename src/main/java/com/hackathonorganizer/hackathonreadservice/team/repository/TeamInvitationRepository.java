@@ -1,4 +1,4 @@
-package com.hackathonorganizer.hackathonreadservice.team.model.repository;
+package com.hackathonorganizer.hackathonreadservice.team.repository;
 
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamInvitation;
 import org.springframework.data.jpa.repository.JpaRepository;

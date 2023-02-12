@@ -8,17 +8,11 @@ import java.util.List;
 public record TeamDto(
 
         Long id,
-
         String name,
-
         String description,
-
         Long ownerId,
-
         boolean isOpen,
-
         Long teamChatRoomId,
-
         List<Tag> tags
 ) {
 }

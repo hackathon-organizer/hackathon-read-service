@@ -27,8 +27,8 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @Query("SELECT t FROM Team t WHERE t.hackathon.id = :hackathonId AND t.name LIKE %:name%")
     Page<Team> findTeamsByHackathonIdAndName(Long hackathonId, String name, Pageable pageable);
 
-    @Query("SELECT new com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto(t.id, t.name, SUM(a.value) AS score)" +
-            " FROM Team t LEFT JOIN CriteriaAnswer a " +
+    @Query("SELECT new com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto(t.id, t.name, SUM(a.value) AS score) " +
+            "FROM Team t LEFT JOIN CriteriaAnswer a " +
             "ON t.id = a.teamId " +
             "WHERE t.hackathon.id = :hackathonId " +
             "GROUP BY t.id ORDER BY score DESC")

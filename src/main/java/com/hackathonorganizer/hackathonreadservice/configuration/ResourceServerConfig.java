@@ -18,14 +18,16 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http
-                .authorizeRequests()
-                .antMatchers("/api/v1/read/teams/suggestions",
-                        "/api/v1/read/teams/invitations/**").hasRole("USER")
-                .antMatchers("/api/v1/read/hackathons/{id}/criteria").hasAnyRole("ORGANIZER", "JURY")
-                .antMatchers("/api/v1/read/hackathons/{hackathonId}/participants").hasRole("USER")
-                .antMatchers("/api/v1/read/hackathons/**").permitAll()
-                .antMatchers("/api/v1/read/teams/**").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/api/v1/read/hackathons",
+                        "/api/v1/read/hackathons/{id}",
+                        "/api/v1/read/hackathons/teams",
+                        "/api/v1/read/hackathons/{id}/participants",
+                        "/api/v1/read/teams",
+                        "/api/v1/read/teams/search",
+                        "/api/v1/read/teams/tags",
+                        "/api/v1/read/teams/{id}").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer()
                 .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()));

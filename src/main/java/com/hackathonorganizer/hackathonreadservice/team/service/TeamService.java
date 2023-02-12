@@ -1,14 +1,15 @@
 package com.hackathonorganizer.hackathonreadservice.team.service;
 
-import com.hackathonorganizer.hackathonreadservice.hackathon.exception.TeamException;
+import com.hackathonorganizer.hackathonreadservice.exception.TeamException;
 import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
-import com.hackathonorganizer.hackathonreadservice.team.model.repository.TagRepository;
-import com.hackathonorganizer.hackathonreadservice.team.model.repository.TeamInvitationRepository;
+
+import com.hackathonorganizer.hackathonreadservice.team.repository.TagRepository;
+import com.hackathonorganizer.hackathonreadservice.team.repository.TeamInvitationRepository;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamRepository;
 import com.hackathonorganizer.hackathonreadservice.utils.TeamMapper;
 import lombok.RequiredArgsConstructor;
@@ -46,29 +47,21 @@ public class TeamService {
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new TeamException("Team with id: " + teamId + " not found",
                         HttpStatus.NOT_FOUND));
 
-        return TeamMapper.mapToTeamDto(team);
-    }
-
-    public boolean isUserTeamOwner(Long teamId, Long userId) {
-
-        Team team = teamRepository.findById(teamId).orElseThrow(() -> new TeamException("Team with id: " + teamId + " not found",
-                        HttpStatus.NOT_FOUND));
-
-        return team.getOwnerId().equals(userId);
+        return TeamMapper.mapToDto(team);
     }
 
     public List<TeamDto> getUserMatchingTeams(List<String> userTags, Long hackathonId) {
 
         List<TeamSuggestion> foundedTeams = teamRepository.getUserMatchingTeams(userTags, hackathonId, PageRequest.of(0, 10));
 
-        return foundedTeams.stream().map(teamSuggestion -> TeamMapper.mapToTeamDto(teamSuggestion.team())).toList();
+        return foundedTeams.stream().map(teamSuggestion -> TeamMapper.mapToDto(teamSuggestion.team())).toList();
     }
 
     public Page<TeamDto> getTeamsByHackathonId(Long hackathonId, Pageable pageable) {
 
         Page<Team> teamsPage = teamRepository.findTeamsByHackathonId(hackathonId, pageable);
 
-        List<TeamDto> teamsResponse = teamsPage.getContent().stream().map(TeamMapper::mapToTeamDto).toList();
+        List<TeamDto> teamsResponse = teamsPage.getContent().stream().map(TeamMapper::mapToDto).toList();
 
         return new PageImpl<>(teamsResponse, pageable, teamsPage.getTotalElements());
     }
@@ -77,7 +70,7 @@ public class TeamService {
 
         Page<Team> teamsPage = teamRepository.findTeamsByHackathonIdAndName(hackathonId, name, pageable);
 
-        List<TeamDto> teamsResponse = teamsPage.getContent().stream().map(TeamMapper::mapToTeamDto).toList();
+        List<TeamDto> teamsResponse = teamsPage.getContent().stream().map(TeamMapper::mapToDto).toList();
 
         return new PageImpl<>(teamsResponse, pageable, teamsPage.getTotalElements());
     }
