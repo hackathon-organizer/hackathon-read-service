@@ -4,9 +4,11 @@ package com.hackathonorganizer.hackathonreadservice;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.TestInstance;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -35,8 +37,11 @@ public class IntegrationTest {
 
     static {
         container = new PostgreSQLContainer(IMAGE_VERSION);
+        container.withUsername("postgres")
+                        .withPassword("qwerty").withDatabaseName("test_db");
 
         container.start();
+        System.out.println(container.getLogs());
     }
 
     @DynamicPropertySource
@@ -45,6 +50,7 @@ public class IntegrationTest {
         registry.add("spring.datasource.url", container::getJdbcUrl);
         registry.add("spring.datasource.password", container::getPassword);
         registry.add("spring.datasource.username", container::getUsername);
+        registry.add("spring.liquibase.contexts", () -> "!prod");
     }
 
     protected MockHttpServletRequestBuilder getJsonResponse(String url) throws Exception {

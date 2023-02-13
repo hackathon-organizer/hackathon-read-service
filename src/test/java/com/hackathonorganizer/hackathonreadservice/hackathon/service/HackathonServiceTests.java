@@ -2,12 +2,13 @@ package com.hackathonorganizer.hackathonreadservice.hackathon.service;
 
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.Hackathon;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonResponse;
-import com.hackathonorganizer.hackathonreadservice.repository.HackathonRepository;
+import com.hackathonorganizer.hackathonreadservice.hackathon.repository.HackathonRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
@@ -53,9 +54,7 @@ public class HackathonServiceTests {
 
         // when
 
-        HackathonResponse hackathonResponse =
-                hackathonService.getHackathonById(hackathonId);
-
+        HackathonResponse hackathonResponse = hackathonService.getHackathonById(hackathonId);
 
         //then
 
@@ -80,15 +79,13 @@ public class HackathonServiceTests {
 
         // when
 
-        List<HackathonResponse> hackathonResponseList =
-                hackathonService.getAllHackathons(pageableMock);
-
+        Page<HackathonResponse> hackathonResponsePage = hackathonService.getAllHackathons(pageableMock);
 
         //then
 
         verify(hackathonRepository).findAll(pageableMock);
 
-        assertThat(hackathonResponseList.size()).isEqualTo(1);
+        assertThat(hackathonResponsePage.getContent().size()).isEqualTo(1);
     }
 
 }

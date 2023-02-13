@@ -33,11 +33,11 @@ public class HackathonService {
     private final CriteriaRepository criteriaRepository;
     private final CriteriaAnswerRepository criteriaAnswerRepository;
 
-    public Hackathon getHackathonById(Long hackathonId) {
+    public HackathonResponse getHackathonById(Long hackathonId) {
 
-        return hackathonRepository.findById(hackathonId)
+        return HackathonMapper.mapToHackathonDto(hackathonRepository.findById(hackathonId)
                 .orElseThrow(() -> new HackathonException(String.format("Hackathon with id: %d not found", hackathonId),
-                        HttpStatus.NOT_FOUND));
+                        HttpStatus.NOT_FOUND)));
     }
 
     public List<TeamDto> getHackathonTeamsById(Long hackathonId) {
@@ -72,7 +72,9 @@ public class HackathonService {
 
     public Set<Long> getHackathonParticipantsIds(Long hackathonId) {
 
-        Hackathon hackathon = getHackathonById(hackathonId);
+        Hackathon hackathon = hackathonRepository.findById(hackathonId)
+                .orElseThrow(() -> new HackathonException(String.format("Hackathon with id: %d not found", hackathonId),
+                        HttpStatus.NOT_FOUND));
 
         return hackathon.getHackathonParticipantsIds();
     }

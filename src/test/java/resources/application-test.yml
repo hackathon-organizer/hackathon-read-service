@@ -1,6 +1,19 @@
 spring:
-  jpa:
+  liquibase:
+    enabled: true
+    change-log: classpath:/changelog/db.changelog-test.xml
+  jpa:git
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: validate
+    hibernate:
+      ddl-auto: validate
+  application:
+    name: hackathon-read-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/auth/realms/hackathon-organizer/protocol/openid-connect/certs
+server:
+  port: 0

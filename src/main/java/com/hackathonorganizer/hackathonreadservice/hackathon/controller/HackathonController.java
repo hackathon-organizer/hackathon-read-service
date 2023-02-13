@@ -29,7 +29,7 @@ public class HackathonController {
     @GetMapping("/{id}")
     public HackathonResponse getHackathonById(@PathVariable Long id) {
 
-        return HackathonMapper.mapToHackathonDto(hackathonService.getHackathonById(id));
+        return hackathonService.getHackathonById(id);
     }
 
     @GetMapping("/{id}/teams")
