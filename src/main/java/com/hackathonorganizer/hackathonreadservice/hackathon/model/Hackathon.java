@@ -6,9 +6,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,28 +24,22 @@ public class Hackathon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
     private String name;
 
-    @NotEmpty
     private String description;
 
-    @NotEmpty
     private String organizerInfo;
 
-    @NotNull
     private Long ownerId;
 
     @Builder.Default
     private boolean isActive = true;
 
-    @NotNull
     @JsonFormat(pattern = "HH:mm:ss dd-MM-yyyy")
-    private LocalDateTime eventStartDate;
+    private OffsetDateTime eventStartDate;
 
-    @NotNull
     @JsonFormat(pattern = "HH:mm:ss dd-MM-yyyy")
-    private LocalDateTime eventEndDate;
+    private OffsetDateTime eventEndDate;
 
     @OneToMany(mappedBy = "hackathon")
     private List<Team> teams;

@@ -7,7 +7,6 @@ import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
-
 import com.hackathonorganizer.hackathonreadservice.team.repository.TagRepository;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamInvitationRepository;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamRepository;
@@ -44,15 +43,16 @@ public class TeamService {
 
     public TeamDto getTeamById(Long teamId) {
 
-        Team team = teamRepository.findById(teamId).orElseThrow(() -> new TeamException("Team with id: " + teamId + " not found",
-                        HttpStatus.NOT_FOUND));
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new TeamException("Team with id: " + teamId + " not found", HttpStatus.NOT_FOUND));
 
         return TeamMapper.mapToDto(team);
     }
 
     public List<TeamDto> getUserMatchingTeams(List<String> userTags, Long hackathonId) {
 
-        List<TeamSuggestion> foundedTeams = teamRepository.getUserMatchingTeams(userTags, hackathonId, PageRequest.of(0, 10));
+        List<TeamSuggestion> foundedTeams = teamRepository.getUserMatchingTeams(userTags, hackathonId,
+                PageRequest.of(0, 10));
 
         return foundedTeams.stream().map(teamSuggestion -> TeamMapper.mapToDto(teamSuggestion.team())).toList();
     }

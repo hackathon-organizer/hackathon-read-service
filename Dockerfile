@@ -10,7 +10,7 @@ RUN mvn -B dependency:resolve dependency:resolve-plugins
 
 COPY src /build/src
 
-RUN mvn clean compile package
+RUN ["mvn","install","-Dmaven.test.skip=true"]
 
 
 

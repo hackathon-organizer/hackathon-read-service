@@ -33,7 +33,7 @@ public class HackathonService {
     private final CriteriaRepository criteriaRepository;
     private final CriteriaAnswerRepository criteriaAnswerRepository;
 
-    public HackathonResponse getHackathonById(Long hackathonId) {
+    public HackathonResponse getHackathonResponse(Long hackathonId) {
 
         return HackathonMapper.mapToHackathonDto(hackathonRepository.findById(hackathonId)
                 .orElseThrow(() -> new HackathonException(String.format("Hackathon with id: %d not found", hackathonId),

@@ -2,20 +2,16 @@ package com.hackathonorganizer.hackathonreadservice.hackathon.controller;
 
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaAnswerDto;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaDto;
-import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonCriteriaDto;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonResponse;
 import com.hackathonorganizer.hackathonreadservice.hackathon.service.HackathonService;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
-import com.hackathonorganizer.hackathonreadservice.utils.HackathonMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -26,14 +22,14 @@ public class HackathonController {
 
     private final HackathonService hackathonService;
 
-    @GetMapping("/{id}")
-    public HackathonResponse getHackathonById(@PathVariable Long id) {
+    @GetMapping("/{hackathonId}")
+    public HackathonResponse getHackathonById(@PathVariable("hackathonId") Long id) {
 
-        return hackathonService.getHackathonById(id);
+        return hackathonService.getHackathonResponse(id);
     }
 
-    @GetMapping("/{id}/teams")
-    public List<TeamDto> getHackathonTeamsById(@PathVariable Long id) {
+    @GetMapping("/{hackathonId}/teams")
+    public List<TeamDto> getHackathonTeamsById(@PathVariable("hackathonId") Long id) {
 
         return hackathonService.getHackathonTeamsById(id);
     }

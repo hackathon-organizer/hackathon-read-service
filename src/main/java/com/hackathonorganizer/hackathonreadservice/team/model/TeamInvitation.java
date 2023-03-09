@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity(name = "team_invitations")
 @Getter
@@ -18,16 +16,13 @@ public class TeamInvitation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
     private String fromUserName;
 
-    @NotNull
     private Long toUserId;
 
     @Enumerated(EnumType.STRING)
     private InvitationStatus invitationStatus;
 
-    @NotEmpty
     private String teamName;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -20,15 +18,13 @@ public class Criteria {
     @Id
     private Long id;
 
-    @NotEmpty
     private String name;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "hackathon_id")
     private Hackathon hackathon;
 
-    @OneToMany(mappedBy = "criteria")
+    @OneToMany(mappedBy = "criteria", cascade = CascadeType.ALL)
     private Set<CriteriaAnswer> criteriaAnswers;
 
 }

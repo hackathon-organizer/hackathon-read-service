@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
     <changeSet id="create-project-structure" author="Yankes">
@@ -10,22 +10,22 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="pk_hackathon_id"/>
             </column>
-            <column name="name" type="varchar" >
+            <column name="name" type="varchar">
                 <constraints nullable="false"/>
             </column>
-            <column name="description" type="varchar" >
+            <column name="description" type="varchar">
                 <constraints nullable="false"/>
             </column>
-            <column name="organizer_info" type="varchar" >
+            <column name="organizer_info" type="varchar">
                 <constraints nullable="false"/>
             </column>
 
             <column name="is_active" type="boolean" defaultValue="true"/>
 
-            <column name="event_start_date" type="datetime" >
+            <column name="event_start_date" type="datetime">
                 <constraints nullable="false"/>
             </column>
-            <column name="event_end_date" type="datetime" >
+            <column name="event_end_date" type="datetime">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -49,7 +49,7 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="pk_tag_id"/>
             </column>
-            <column name="name" type="varchar" />
+            <column name="name" type="varchar"/>
         </createTable>
 
         <createTable tableName="team_tags">
@@ -78,17 +78,21 @@
         </createTable>
 
         <addForeignKeyConstraint constraintName="fk_hackathon_team_id" referencedTableName="hackathon"
-                                    baseColumnNames="hackathon_id"
-                                    baseTableName="team" referencedColumnNames="id" onUpdate="RESTRICT" onDelete="RESTRICT"/>
+                                 baseColumnNames="hackathon_id"
+                                 baseTableName="team" referencedColumnNames="id" onUpdate="RESTRICT"
+                                 onDelete="RESTRICT"/>
 
         <addForeignKeyConstraint constraintName="fk_team_team_members_id" referencedTableName="team"
                                  baseColumnNames="team_id"
-                                 baseTableName="team_members" referencedColumnNames="id" onUpdate="RESTRICT" onDelete="RESTRICT"/>
+                                 baseTableName="team_members" referencedColumnNames="id" onUpdate="RESTRICT"
+                                 onDelete="RESTRICT"/>
 
-        <addForeignKeyConstraint baseTableName="team_tags" baseColumnNames="tag_id" constraintName="fk_team_tags_tag_id" referencedTableName="tag"
+        <addForeignKeyConstraint baseTableName="team_tags" baseColumnNames="tag_id" constraintName="fk_team_tags_tag_id"
+                                 referencedTableName="tag"
                                  referencedColumnNames="id" onUpdate="RESTRICT" onDelete="RESTRICT"/>
 
-        <addForeignKeyConstraint baseTableName="team_tags" baseColumnNames="team_id" constraintName="fk_team_tags_team_id" referencedTableName="team"
+        <addForeignKeyConstraint baseTableName="team_tags" baseColumnNames="team_id"
+                                 constraintName="fk_team_tags_team_id" referencedTableName="team"
                                  referencedColumnNames="id" onUpdate="RESTRICT" onDelete="RESTRICT"/>
     </changeSet>
 
@@ -101,7 +105,8 @@
 
         <addForeignKeyConstraint constraintName="fk_hackathon_hackathon_participants_id" referencedTableName="hackathon"
                                  baseColumnNames="hackathon_id"
-                                 baseTableName="hackathon_participants" referencedColumnNames="id" onUpdate="RESTRICT" onDelete="RESTRICT"/>
+                                 baseTableName="hackathon_participants" referencedColumnNames="id" onUpdate="RESTRICT"
+                                 onDelete="RESTRICT"/>
     </changeSet>
 
     <changeSet id="add-team-invites" author="Yankes">
@@ -127,7 +132,8 @@
 
         <addForeignKeyConstraint constraintName="fk_team_team_invitations" referencedTableName="team"
                                  baseColumnNames="team_id"
-                                 baseTableName="team_invitations" referencedColumnNames="id" onUpdate="RESTRICT" onDelete="RESTRICT"/>
+                                 baseTableName="team_invitations" referencedColumnNames="id" onUpdate="RESTRICT"
+                                 onDelete="RESTRICT"/>
     </changeSet>
 
 
