@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -20,11 +21,11 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "Owner id can not be empty!")
     private Long ownerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @NotEmpty
+    @NotNull(message = "Hackathon can not be null!")
     private Hackathon hackathon;
 
     @ElementCollection
