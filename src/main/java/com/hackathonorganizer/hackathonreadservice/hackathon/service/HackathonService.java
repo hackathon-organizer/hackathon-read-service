@@ -80,7 +80,6 @@ public class HackathonService {
     }
 
     public List<TeamScoreDto> getHackathonLeaderboard(Long hackathonId) {
-
         return teamService.findTeamsLeaderboardByHackathonId(hackathonId);
     }
 }

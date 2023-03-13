@@ -23,33 +23,28 @@ public class TeamController {
 
     @GetMapping
     public Page<TeamDto> getTeamsByHackathonId(@RequestParam("hackathonId") Long hackathonId, Pageable pageable) {
-
         return teamService.getTeamsByHackathonId(hackathonId, pageable);
     }
 
     @GetMapping("/search")
     public Page<TeamDto> getTeamsByName(@RequestParam("hackathonId") Long hackathonId, @RequestParam("name") String name,
                                         Pageable pageable) {
-
         return teamService.getTeamsByName(hackathonId, name, pageable);
     }
 
     @GetMapping("/invitations/{userId}")
     @RolesAllowed("USER")
     public List<TeamInvitationDto> getInvitations(@PathVariable("userId") Long userId) {
-
         return teamService.getUserInvitations(userId);
     }
 
     @GetMapping("/tags")
     public List<Tag> getAvailableTags() {
-
         return teamService.getAvailableTags();
     }
 
     @GetMapping("/{id}")
     public TeamDto getTeamById(@PathVariable("id") Long teamId) {
-
         return teamService.getTeamById(teamId);
     }
 
@@ -57,7 +52,6 @@ public class TeamController {
     @RolesAllowed("USER")
     public List<TeamDto> getMatchingTeams(@RequestBody List<String> userTagsNames,
                                           @RequestParam("hackathonId") Long hackathonId) {
-
         return teamService.getUserMatchingTeams(userTagsNames, hackathonId);
     }
 }

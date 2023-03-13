@@ -8,12 +8,9 @@ import com.hackathonorganizer.hackathonreadservice.team.model.TeamInvitation;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TagRepository;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamInvitationRepository;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamRepository;
-
-import liquibase.pro.packaged.L;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

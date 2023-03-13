@@ -36,11 +36,6 @@ public class TeamService {
                 .map(TeamMapper::mapToTeamInvitationDto).collect(Collectors.toList());
     }
 
-    public List<Tag> getAvailableTags() {
-
-        return tagRepository.findAll();
-    }
-
     public TeamDto getTeamById(Long teamId) {
 
         Team team = teamRepository.findById(teamId)
@@ -76,7 +71,10 @@ public class TeamService {
     }
 
     public List<TeamScoreDto> findTeamsLeaderboardByHackathonId(Long hackathonId) {
-
         return teamRepository.getLeaderboard(hackathonId);
+    }
+
+    public List<Tag> getAvailableTags() {
+        return tagRepository.findAll();
     }
 }

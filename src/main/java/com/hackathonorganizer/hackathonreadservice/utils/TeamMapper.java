@@ -1,6 +1,5 @@
 package com.hackathonorganizer.hackathonreadservice.utils;
 
-import com.hackathonorganizer.hackathonreadservice.team.model.InvitationStatus;
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamInvitation;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
@@ -29,7 +28,7 @@ public class TeamMapper {
                 teamInvitation.getId(),
                 teamInvitation.getFromUserName(),
                 teamInvitation.getToUserId(),
-                InvitationStatus.PENDING,
+                teamInvitation.getInvitationStatus(),
                 teamInvitation.getTeamName(),
                 teamInvitation.getTeam().getId());
     }

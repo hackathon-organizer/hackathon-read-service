@@ -10,6 +10,5 @@ public record TeamInvitationDto(
         InvitationStatus invitationStatus,
         String teamName,
         Long teamId
-
 ) {
 }

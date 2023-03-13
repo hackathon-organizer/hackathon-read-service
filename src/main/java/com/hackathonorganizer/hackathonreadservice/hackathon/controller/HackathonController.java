@@ -24,47 +24,39 @@ public class HackathonController {
 
     @GetMapping("/{hackathonId}")
     public HackathonResponse getHackathonById(@PathVariable("hackathonId") Long id) {
-
         return hackathonService.getHackathonResponse(id);
     }
 
     @GetMapping("/{hackathonId}/teams")
     public List<TeamDto> getHackathonTeamsById(@PathVariable("hackathonId") Long id) {
-
         return hackathonService.getHackathonTeamsById(id);
     }
 
     @GetMapping
     public Page<HackathonResponse> getAllHackathons(Pageable pageable) {
-
         return hackathonService.getAllHackathons(pageable);
     }
 
     @GetMapping("/{hackathonId}/criteria")
     @RolesAllowed({"ORGANIZER", "JURY"})
     public List<CriteriaDto> getHackathonRateCriteria(@PathVariable("hackathonId") Long hackathonId) {
-
         return hackathonService.getHackathonRatingCriteria(hackathonId);
     }
 
     @GetMapping("/{hackathonId}/criteria/answers")
     @RolesAllowed({"ORGANIZER", "JURY"})
-    public List<CriteriaAnswerDto> getHackathonRateCriteriaWithAnswers(@PathVariable("hackathonId") Long hackathonId,
-                                                                       @RequestParam("userId") Long userId) {
-
+    public List<CriteriaAnswerDto> getHackathonRateCriteriaWithAnswers(@PathVariable("hackathonId") Long hackathonId, @RequestParam("userId") Long userId) {
         return hackathonService.getHackathonRatingCriteriaAnswers(userId, hackathonId);
     }
 
     @GetMapping("/{hackathonId}/participants")
     public Set<Long> getHackathonParticipantsIds(@PathVariable("hackathonId") Long hackathonId) {
-
         return hackathonService.getHackathonParticipantsIds(hackathonId);
     }
 
     @GetMapping("/{hackathonId}/leaderboard")
     @RolesAllowed("ORGANIZER")
     public List<TeamScoreDto> getHackathonLeaderboard(@PathVariable("hackathonId") Long hackathonId) {
-
         return hackathonService.getHackathonLeaderboard(hackathonId);
     }
 }

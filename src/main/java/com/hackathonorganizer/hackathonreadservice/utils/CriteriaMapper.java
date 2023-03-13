@@ -10,6 +10,7 @@ import lombok.experimental.UtilityClass;
 public class CriteriaMapper {
 
     public static CriteriaDto mapToDto(Criteria criteria) {
+
         return new CriteriaDto(
                 criteria.getId(),
                 criteria.getName(),
@@ -18,6 +19,7 @@ public class CriteriaMapper {
     }
 
     public static CriteriaAnswerDto mapToCriteriaAnswerDto(CriteriaAnswer criteriaAnswer) {
+
         return new CriteriaAnswerDto(
                 criteriaAnswer.getId(),
                 criteriaAnswer.getValue(),

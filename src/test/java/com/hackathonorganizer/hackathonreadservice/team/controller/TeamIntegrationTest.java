@@ -1,6 +1,5 @@
 package com.hackathonorganizer.hackathonreadservice.team.controller;
 
-import antlr.ASTNULLType;
 import com.hackathonorganizer.hackathonreadservice.BaseIntegrationTest;
 import com.hackathonorganizer.hackathonreadservice.creator.Role;
 import com.hackathonorganizer.hackathonreadservice.creator.TestDataUtils;
