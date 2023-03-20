@@ -20,6 +20,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/v1/read/hackathons",
+                        "/api/v1/read/hackathons/files/**",
                         "/api/v1/read/hackathons/{id}",
                         "/api/v1/read/hackathons/teams",
                         "/api/v1/read/hackathons/{id}/participants",

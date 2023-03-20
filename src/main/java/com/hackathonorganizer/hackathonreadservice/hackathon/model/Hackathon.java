@@ -32,6 +32,8 @@ public class Hackathon {
 
     private Long ownerId;
 
+    private String logoName;
+
     @Builder.Default
     private boolean isActive = true;
 

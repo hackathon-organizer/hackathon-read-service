@@ -7,11 +7,14 @@ import com.hackathonorganizer.hackathonreadservice.hackathon.service.HackathonSe
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
 import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -58,5 +61,10 @@ public class HackathonController {
     @RolesAllowed("ORGANIZER")
     public List<TeamScoreDto> getHackathonLeaderboard(@PathVariable("hackathonId") Long hackathonId) {
         return hackathonService.getHackathonLeaderboard(hackathonId);
+    }
+
+    @GetMapping(value = "/files/{filename}")
+    public byte[] getImage(@PathVariable("filename") String filename) {
+       return hackathonService.getFileByName(filename);
     }
 }

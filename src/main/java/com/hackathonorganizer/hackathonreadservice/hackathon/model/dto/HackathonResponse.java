@@ -8,6 +8,7 @@ public record HackathonResponse(
         String name,
         String description,
         boolean isActive,
+        String logoName,
         Integer hackathonParticipantsNumber,
         OffsetDateTime eventStartDate,
         OffsetDateTime eventEndDate
