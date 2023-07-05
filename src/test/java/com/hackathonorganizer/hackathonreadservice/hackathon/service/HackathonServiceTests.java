@@ -4,14 +4,14 @@ import com.hackathonorganizer.hackathonreadservice.creator.TestDataUtils;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.Criteria;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.CriteriaAnswer;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.Hackathon;
-import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaAnswerDto;
-import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaDto;
+import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaAnswerResponse;
+import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaResponse;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonResponse;
 import com.hackathonorganizer.hackathonreadservice.hackathon.repository.CriteriaAnswerRepository;
 import com.hackathonorganizer.hackathonreadservice.hackathon.repository.CriteriaRepository;
 import com.hackathonorganizer.hackathonreadservice.hackathon.repository.HackathonRepository;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamResponse;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreResponse;
 import com.hackathonorganizer.hackathonreadservice.team.service.TeamService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -82,7 +82,7 @@ public class HackathonServiceTests {
 
         // when
 
-        List<TeamDto> result = hackathonService.getHackathonTeamsById(mockHackathon.getId());
+        List<TeamResponse> result = hackathonService.getHackathonTeamsById(mockHackathon.getId());
 
         // then
 
@@ -136,7 +136,7 @@ public class HackathonServiceTests {
 
         // when
 
-        List<CriteriaDto> result = hackathonService.getHackathonRatingCriteria(mockHackathon.getId());
+        List<CriteriaResponse> result = hackathonService.getHackathonRatingCriteria(mockHackathon.getId());
 
         // then
 
@@ -159,7 +159,7 @@ public class HackathonServiceTests {
 
         // when
 
-        List<CriteriaAnswerDto> result =
+        List<CriteriaAnswerResponse> result =
                 hackathonService.getHackathonRatingCriteriaAnswers(1L, mockHackathon.getId());
 
         // then
@@ -178,12 +178,12 @@ public class HackathonServiceTests {
         // given
 
         when(teamService.findTeamsLeaderboardByHackathonId(anyLong())).thenReturn(List.of(
-                new TeamScoreDto(1L, "Team name", 100L)
+                new TeamScoreResponse(1L, "Team name", 100L)
         ));
 
         // when
 
-        List<TeamScoreDto> result = hackathonService.getHackathonLeaderboard(mockHackathon.getId());
+        List<TeamScoreResponse> result = hackathonService.getHackathonLeaderboard(mockHackathon.getId());
 
         // then
 
@@ -201,7 +201,7 @@ public class HackathonServiceTests {
 
         // when
 
-        List<TeamScoreDto> result = hackathonService.getHackathonLeaderboard(mockHackathon.getId());
+        List<TeamScoreResponse> result = hackathonService.getHackathonLeaderboard(mockHackathon.getId());
 
         // then
 

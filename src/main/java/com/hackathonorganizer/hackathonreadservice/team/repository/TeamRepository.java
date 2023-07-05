@@ -2,7 +2,7 @@ package com.hackathonorganizer.hackathonreadservice.team.repository;
 
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,10 +27,11 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @Query("SELECT t FROM Team t WHERE t.hackathon.id = :hackathonId AND t.name LIKE %:name%")
     Page<Team> findTeamsByHackathonIdAndName(Long hackathonId, String name, Pageable pageable);
 
-    @Query("SELECT new com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto(t.id, t.name, SUM(a.value) AS score) " +
+    @Query("SELECT new com.hackathonorganizer.hackathonreadservice.team.model.dto." +
+            "TeamScoreResponse(t.id, t.name, SUM(a.value) AS score) " +
             "FROM Team t LEFT JOIN CriteriaAnswer a " +
             "ON t.id = a.teamId " +
             "WHERE t.hackathon.id = :hackathonId " +
             "GROUP BY t.id ORDER BY score DESC")
-    List<TeamScoreDto> getLeaderboard(Long hackathonId);
+    List<TeamScoreResponse> getLeaderboard(Long hackathonId);
 }

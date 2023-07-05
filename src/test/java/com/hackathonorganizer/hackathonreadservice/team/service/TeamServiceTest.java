@@ -6,8 +6,8 @@ import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamInvitation;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamSuggestion;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamResponse;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationResponse;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TagRepository;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamInvitationRepository;
 import com.hackathonorganizer.hackathonreadservice.team.repository.TeamRepository;
@@ -68,7 +68,7 @@ public class TeamServiceTest {
 
         // when
 
-        List<TeamInvitationDto> result = teamService.getUserInvitations(1L);
+        List<TeamInvitationResponse> result = teamService.getUserInvitations(1L);
 
         // then
         verify(teamInvitationRepository).getUserTeamInvitations(1L);
@@ -106,7 +106,7 @@ public class TeamServiceTest {
 
         // when
 
-        TeamDto result = teamService.getTeamById(mockTeam.getId());
+        TeamResponse result = teamService.getTeamById(mockTeam.getId());
 
         // then
 
@@ -146,7 +146,7 @@ public class TeamServiceTest {
 
         // when
 
-        List<TeamDto> result = teamService.getUserMatchingTeams(userTags, mockTeam.getHackathon().getId());
+        List<TeamResponse> result = teamService.getUserMatchingTeams(userTags, mockTeam.getHackathon().getId());
 
         // then
 
@@ -166,7 +166,7 @@ public class TeamServiceTest {
 
         // when
 
-        Page<TeamDto> result = teamService.getTeamsByHackathonId(mockTeam.getHackathon().getId(), pageable);
+        Page<TeamResponse> result = teamService.getTeamsByHackathonId(mockTeam.getHackathon().getId(), pageable);
 
         // then
 
@@ -186,7 +186,7 @@ public class TeamServiceTest {
 
         // when
 
-        Page<TeamDto> result = teamService.getTeamsByName(mockTeam.getHackathon().getId(), mockTeam.getName(), pageable);
+        Page<TeamResponse> result = teamService.getTeamsByName(mockTeam.getHackathon().getId(), mockTeam.getName(), pageable);
 
         // then
         verify(teamRepository)

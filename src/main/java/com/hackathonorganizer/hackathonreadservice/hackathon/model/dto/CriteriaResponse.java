@@ -2,10 +2,10 @@ package com.hackathonorganizer.hackathonreadservice.hackathon.model.dto;
 
 import java.util.List;
 
-public record CriteriaDto(
+public record CriteriaResponse(
 
         Long id,
         String name,
-        List<CriteriaAnswerDto> answers
+        List<CriteriaAnswerResponse> answers
 ) {
 }

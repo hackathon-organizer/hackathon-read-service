@@ -1,6 +1,6 @@
 package com.hackathonorganizer.hackathonreadservice.hackathon.model.dto;
 
-public record CriteriaAnswerDto(
+public record CriteriaAnswerResponse(
 
         Long id,
         Integer value,

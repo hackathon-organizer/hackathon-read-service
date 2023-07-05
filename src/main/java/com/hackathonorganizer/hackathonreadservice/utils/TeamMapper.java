@@ -2,16 +2,16 @@ package com.hackathonorganizer.hackathonreadservice.utils;
 
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import com.hackathonorganizer.hackathonreadservice.team.model.TeamInvitation;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamResponse;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationResponse;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class TeamMapper {
 
-    public static TeamDto mapToDto(Team team) {
+    public static TeamResponse mapToDto(Team team) {
 
-        return new TeamDto(
+        return new TeamResponse(
                 team.getId(),
                 team.getName(),
                 team.getDescription(),
@@ -22,9 +22,9 @@ public class TeamMapper {
         );
     }
 
-    public static TeamInvitationDto mapToTeamInvitationDto(TeamInvitation teamInvitation) {
+    public static TeamInvitationResponse mapToTeamInvitationDto(TeamInvitation teamInvitation) {
 
-        return new TeamInvitationDto(
+        return new TeamInvitationResponse(
                 teamInvitation.getId(),
                 teamInvitation.getFromUserName(),
                 teamInvitation.getToUserId(),

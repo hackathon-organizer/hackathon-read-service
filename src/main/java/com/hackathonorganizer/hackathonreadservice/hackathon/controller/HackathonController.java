@@ -1,20 +1,17 @@
 package com.hackathonorganizer.hackathonreadservice.hackathon.controller;
 
-import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaAnswerDto;
-import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaDto;
+import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaAnswerResponse;
+import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.CriteriaResponse;
 import com.hackathonorganizer.hackathonreadservice.hackathon.model.dto.HackathonResponse;
 import com.hackathonorganizer.hackathonreadservice.hackathon.service.HackathonService;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamResponse;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamScoreResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +28,7 @@ public class HackathonController {
     }
 
     @GetMapping("/{hackathonId}/teams")
-    public List<TeamDto> getHackathonTeamsById(@PathVariable("hackathonId") Long id) {
+    public List<TeamResponse> getHackathonTeamsById(@PathVariable("hackathonId") Long id) {
         return hackathonService.getHackathonTeamsById(id);
     }
 
@@ -42,13 +39,13 @@ public class HackathonController {
 
     @GetMapping("/{hackathonId}/criteria")
     @RolesAllowed({"ORGANIZER", "JURY"})
-    public List<CriteriaDto> getHackathonRateCriteria(@PathVariable("hackathonId") Long hackathonId) {
+    public List<CriteriaResponse> getHackathonRateCriteria(@PathVariable("hackathonId") Long hackathonId) {
         return hackathonService.getHackathonRatingCriteria(hackathonId);
     }
 
     @GetMapping("/{hackathonId}/criteria/answers")
     @RolesAllowed({"ORGANIZER", "JURY"})
-    public List<CriteriaAnswerDto> getHackathonRateCriteriaWithAnswers(@PathVariable("hackathonId") Long hackathonId, @RequestParam("userId") Long userId) {
+    public List<CriteriaAnswerResponse> getHackathonRateCriteriaWithAnswers(@PathVariable("hackathonId") Long hackathonId, @RequestParam("userId") Long userId) {
         return hackathonService.getHackathonRatingCriteriaAnswers(userId, hackathonId);
     }
 
@@ -59,7 +56,7 @@ public class HackathonController {
 
     @GetMapping("/{hackathonId}/leaderboard")
     @RolesAllowed("ORGANIZER")
-    public List<TeamScoreDto> getHackathonLeaderboard(@PathVariable("hackathonId") Long hackathonId) {
+    public List<TeamScoreResponse> getHackathonLeaderboard(@PathVariable("hackathonId") Long hackathonId) {
         return hackathonService.getHackathonLeaderboard(hackathonId);
     }
 

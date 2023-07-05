@@ -7,6 +7,7 @@ public record HackathonResponse(
         Long id,
         String name,
         String description,
+        String organizerInfo,
         boolean isActive,
         String logoName,
         Integer hackathonParticipantsNumber,

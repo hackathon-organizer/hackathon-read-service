@@ -1,6 +1,6 @@
 package com.hackathonorganizer.hackathonreadservice.team.model.dto;
 
-public record TeamScoreDto(
+public record TeamScoreResponse(
 
         Long id,
         String name,

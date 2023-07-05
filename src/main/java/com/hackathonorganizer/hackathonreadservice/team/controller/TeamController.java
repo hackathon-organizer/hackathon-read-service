@@ -1,8 +1,8 @@
 package com.hackathonorganizer.hackathonreadservice.team.controller;
 
 import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamDto;
-import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationDto;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamResponse;
+import com.hackathonorganizer.hackathonreadservice.team.model.dto.TeamInvitationResponse;
 import com.hackathonorganizer.hackathonreadservice.team.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,19 +22,19 @@ public class TeamController {
     private final TeamService teamService;
 
     @GetMapping
-    public Page<TeamDto> getTeamsByHackathonId(@RequestParam("hackathonId") Long hackathonId, Pageable pageable) {
+    public Page<TeamResponse> getTeamsByHackathonId(@RequestParam("hackathonId") Long hackathonId, Pageable pageable) {
         return teamService.getTeamsByHackathonId(hackathonId, pageable);
     }
 
     @GetMapping("/search")
-    public Page<TeamDto> getTeamsByName(@RequestParam("hackathonId") Long hackathonId, @RequestParam("name") String name,
-                                        Pageable pageable) {
+    public Page<TeamResponse> getTeamsByName(@RequestParam("hackathonId") Long hackathonId, @RequestParam("name") String name,
+                                             Pageable pageable) {
         return teamService.getTeamsByName(hackathonId, name, pageable);
     }
 
     @GetMapping("/invitations/{userId}")
     @RolesAllowed("USER")
-    public List<TeamInvitationDto> getInvitations(@PathVariable("userId") Long userId) {
+    public List<TeamInvitationResponse> getInvitations(@PathVariable("userId") Long userId) {
         return teamService.getUserInvitations(userId);
     }
 
@@ -44,14 +44,14 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public TeamDto getTeamById(@PathVariable("id") Long teamId) {
+    public TeamResponse getTeamById(@PathVariable("id") Long teamId) {
         return teamService.getTeamById(teamId);
     }
 
     @PostMapping("/suggestions")
     @RolesAllowed("USER")
-    public List<TeamDto> getMatchingTeams(@RequestBody List<String> userTagsNames,
-                                          @RequestParam("hackathonId") Long hackathonId) {
+    public List<TeamResponse> getMatchingTeams(@RequestBody List<String> userTagsNames,
+                                               @RequestParam("hackathonId") Long hackathonId) {
         return teamService.getUserMatchingTeams(userTagsNames, hackathonId);
     }
 }

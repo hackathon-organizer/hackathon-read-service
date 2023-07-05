@@ -4,8 +4,7 @@ import com.hackathonorganizer.hackathonreadservice.team.model.Tag;
 
 import java.util.List;
 
-
-public record TeamDto(
+public record TeamResponse(
 
         Long id,
         String name,

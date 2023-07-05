@@ -11,6 +11,7 @@ public class HackathonMapper {
                 hackathon.getId(),
                 hackathon.getName(),
                 hackathon.getDescription(),
+                hackathon.getOrganizerInfo(),
                 hackathon.isActive(),
                 hackathon.getLogoName(),
                 hackathon.getHackathonParticipantsIds().size(),

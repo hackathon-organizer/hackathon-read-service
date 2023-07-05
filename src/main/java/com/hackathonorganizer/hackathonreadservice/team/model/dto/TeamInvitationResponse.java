@@ -2,7 +2,7 @@ package com.hackathonorganizer.hackathonreadservice.team.model.dto;
 
 import com.hackathonorganizer.hackathonreadservice.team.model.InvitationStatus;
 
-public record TeamInvitationDto(
+public record TeamInvitationResponse(
 
         Long id,
         String fromUserName,
