@@ -1,6 +1,13 @@
 spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:/changelog/db.changelog-test.xml
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: validate
+    hibernate:
+      ddl-auto: validate
+  config:
+    cloud:
+      enabled: false

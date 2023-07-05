@@ -19,6 +19,7 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Name can not be empty!")
+
+    @NotEmpty(message = "Name can not be empty")
     private String name;
 }

@@ -1,9 +1,8 @@
-package com.hackathonorganizer.hackathonreadservice.hackathon.exception;
+package com.hackathonorganizer.hackathonreadservice.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
@@ -11,11 +10,10 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(HackathonException.class)
-    public ResponseEntity<ErrorResponse> handleHackathonException(HackathonException ex) {
+    @ExceptionHandler({HackathonException.class, TeamException.class})
+    public ResponseEntity<ErrorResponse> handleHackathonException(BaseException ex) {
 
-        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(),
-                List.of(ex.getMessage()));
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), List.of(ex.getMessage()));
 
         return ResponseEntity.status(ex.getHttpStatus()).body(errorResponse);
     }

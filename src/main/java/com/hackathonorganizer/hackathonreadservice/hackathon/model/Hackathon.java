@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hackathonorganizer.hackathonreadservice.team.model.Team;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import javax.validation.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
@@ -26,25 +26,29 @@ public class Hackathon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Name can not be empty!")
+    @NotEmpty(message = "Name can not be empty")
     private String name;
 
-    @NotEmpty(message = "Description can not be empty!")
+    @NotEmpty(message = "Description can not be empty")
     private String description;
 
-    @NotEmpty(message = "Organizer info can not be empty!")
+    @NotEmpty(message = "Organizer info can not be empty")
     private String organizerInfo;
+
+    private Long ownerId;
+
+    private String logoName;
 
     @Builder.Default
     private boolean isActive = true;
 
-    @NotNull(message = "Event start date can not be null!")
+    @NotNull(message = "Event start date can not be null")
     @JsonFormat(pattern = "HH:mm:ss dd-MM-yyyy")
-    private LocalDateTime eventStartDate;
+    private OffsetDateTime eventStartDate;
 
-    @NotNull(message = "Event end date can not be null!")
+    @NotNull(message = "Event end date can not be null")
     @JsonFormat(pattern = "HH:mm:ss dd-MM-yyyy")
-    private LocalDateTime eventEndDate;
+    private OffsetDateTime eventEndDate;
 
     @OneToMany(mappedBy = "hackathon")
     private List<Team> teams;
@@ -55,4 +59,18 @@ public class Hackathon {
     @Column(name = "participant_id")
     @Builder.Default
     private Set<Long> hackathonParticipantsIds = new HashSet<>();
+
+    public void addUserToHackathonParticipants(Long userId) {
+
+        if (!hackathonParticipantsIds.add(userId)) {
+            log.info("Participant with id: {} is already added", userId);
+        }
+    }
+
+    public void removeUserFromHackathonParticipants(Long userId) {
+
+        if (!hackathonParticipantsIds.remove(userId)) {
+            log.info("Participant with id: {} not found", userId);
+        }
+    }
 }
